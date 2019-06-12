@@ -151,7 +151,7 @@ class Sanitizer {
 	 *   bool $silent = false
 	 *   int $maxLength = [various]
 	 * )
-	 * @return the sanitized result data, null on failure
+	 * @return mixed the sanitized result data, null on failure
 	 */
 	public static function __callStatic( $sanitizer, $args ) {
 		self::$_error = '';

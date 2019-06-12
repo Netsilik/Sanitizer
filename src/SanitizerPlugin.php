@@ -30,6 +30,11 @@ abstract class SanitizerPlugin {
 	protected $forceLength = false;
 	
 	/**
+	 * @var string The last error
+	 */
+	protected $errorStr = '';
+	
+	/**
 	 * constructor
 	 */
 	final public function __construct() {
