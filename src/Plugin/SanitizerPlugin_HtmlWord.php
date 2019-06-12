@@ -17,7 +17,7 @@ use Netsilik\Lib\Sanitizer\SanitizerPlugin;
  */
 class SanitizerPlugin_HtmlWord extends SanitizerPlugin
 {
-	protected $regEx     = '/[^a-z0-9_\\-#=<>"\'&?~]/i';
+	protected $_regEx     = '/[^a-z0-9_\\-#=<>"\'&?~]/i';
 	
-	protected $maxLength = 8;
+	protected $_maxLength = 8;
 }

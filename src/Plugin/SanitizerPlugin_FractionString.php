@@ -17,7 +17,7 @@ use Netsilik\Lib\Sanitizer\SanitizerPlugin;
  */
 class SanitizerPlugin_FractionString extends SanitizerPlugin
 {
-	protected $regex     = '/([^0-9\\/\\-])/';
+	protected $regex      = '/([^0-9\\/\\-])/';
 	
-	protected $maxLength = 255;
+	protected $_maxLength = 255;
 }

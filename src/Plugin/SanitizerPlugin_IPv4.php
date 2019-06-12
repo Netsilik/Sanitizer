@@ -17,5 +17,5 @@ use Netsilik\Lib\Sanitizer\SanitizerPlugin;
  */
 class SanitizerPlugin_IPv4 extends SanitizerPlugin
 {
-	protected $regEx = '/[^0-9\\.]/';
+	protected $_regEx = '/[^0-9\\.]/';
 }

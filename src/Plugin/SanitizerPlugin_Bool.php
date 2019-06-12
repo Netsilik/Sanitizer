@@ -11,16 +11,15 @@ namespace Netsilik\Lib\Sanitizer\Plugin;
 use Netsilik\Lib\Sanitizer\SanitizerPlugin;
 
 /**
- * Force data to be of type bool
+ * Force data to be of type bool, resolve all false-ish values to false
  *
  * @return bool
- * @note the value -1 resolves to false
  */
 class SanitizerPlugin_Bool extends SanitizerPlugin
 {
 	public function sanitize($data, $silent, $maxLength = 0)
 	{
-		$this->errorStr = '';
+		$this->_errorStr = '';
 		if (is_bool($data)) {
 			return $data;
 		}
@@ -33,7 +32,7 @@ class SanitizerPlugin_Bool extends SanitizerPlugin
 		} elseif ($data == 'false' || $data == '0' || $data == '-1') {
 			return false;
 		} elseif (!$silent) {
-			$this->errorStr = 'Invalid characters encounterd in ' . $this->getType() . ' data';
+			$this->_errorStr = 'Invalid characters encounterd in ' . $this->_getType() . ' data';
 		}
 		
 		return null;

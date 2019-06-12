@@ -17,5 +17,5 @@ use Netsilik\Lib\Sanitizer\SanitizerPlugin;
  */
 class SanitizerPlugin_PhoneNumber extends SanitizerPlugin
 {
-	protected $regEx = '/[^0-9+\\-()0x20]/';
+	protected $_regEx = '/[^0-9+\\-()0x20]/';
 }

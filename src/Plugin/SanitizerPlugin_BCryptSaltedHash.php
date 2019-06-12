@@ -11,16 +11,15 @@ namespace Netsilik\Lib\Sanitizer\Plugin;
 use Netsilik\Lib\Sanitizer\SanitizerPlugin;
 
 /**
- * Force data to be valid 60 characters long salted BCrypt hash string format
+ * Force data to be valid 60 characters long salted BCrypt hash string format, zero left padded up 60 characters
  *
  * @return string
- * @note zero left padded up 60 characters
  */
 class SanitizerPlugin_BCryptSaltedHash extends SanitizerPlugin
 {
-	protected $regEx       = '/[^\\.\\/0-9A-Z$]/i';
+	protected $_regEx       = '/[^\\.\\/0-9A-Z$]/i';
 	
-	protected $maxLength   = 60;
+	protected $_maxLength   = 60;
 	
-	protected $forceLength = true;
+	protected $_forceLength = true;
 }

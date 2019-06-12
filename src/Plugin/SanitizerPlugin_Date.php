@@ -17,7 +17,7 @@ use Netsilik\Lib\Sanitizer\SanitizerPlugin;
  */
 class SanitizerPlugin_Date extends SanitizerPlugin
 {
-	protected $regEx     = '/[^0-9\\-]/';
+	protected $_regEx     = '/[^0-9\\-]/';
 	
-	protected $maxLength = 10;
+	protected $_maxLength = 10;
 }

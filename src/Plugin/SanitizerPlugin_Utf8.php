@@ -13,32 +13,29 @@ use Netsilik\Lib\Sanitizer\SanitizerPlugin;
 /**
  * Force data to be of encoding UTF-8 with normalized newlines, excluding UTF-8 control characters
  *
+ * All non UTF-8 strigs are assumed to be in encoding ISO 8859-1 (Latin-1) as per RFC 2616 section 3.7.1
+ *
  * @return string
- * @note   all non UTF-8 strigs are assumed to be in encoding ISO 8859-1 (Latin-1) as per RFC 2616 section 3.7.1
- * @warning:
- * ** ******************************************************************* **
- * ** WARNING: The sanitized results are not 'safe', escape as nessecary! **
- * ** ******************************************************************* **
  */
 class SanitizerPlugin_Utf8 extends SanitizerPlugin
 {
-	protected $regEx    = '/[^\\p{L}\\p{M}\\p{N}\\p{P}\\p{S}\\p{Z}\n]/u';
+	protected $_regEx    = '/[^\\p{L}\\p{M}\\p{N}\\p{P}\\p{S}\\p{Z}\n]/u';
 	
-	protected $errorStr = '';
+	protected $_errorStr = '';
 	
 	public function sanitize($data, $silent, $maxLength = 0)
 	{
-		$this->errorStr = '';
+		$this->_errorStr = '';
 		if (!function_exists('mb_strlen')) { // Check for Multibyte String support
 			trigger_error('Multibyte String functionality not supported. Please enable the Multibyte String extension enabled or do not use this sanitizer', E_USER_ERROR);
 		}
 		
 		if ($maxLength == 0) {
-			$maxLength = $this->maxLength;
+			$maxLength = $this->_maxLength;
 		}
 		if (!$this->checkUtf8Valid($data)) {
 			if (!$silent) {
-				$this->errorStr = 'Data is not a valid UTF-8 byte pattern data';
+				$this->_errorStr = 'Data is not a valid UTF-8 byte pattern data';
 				
 				return null;
 			}
@@ -48,16 +45,16 @@ class SanitizerPlugin_Utf8 extends SanitizerPlugin
 		}
 		
 		$data      = $this->normalizeNewlines($data);
-		$sanitized = preg_replace($this->regEx, '', $data); // Remove control characters
+		$sanitized = preg_replace($this->_regEx, '', $data); // Remove control characters
 		if (!$silent && $data <> $sanitized) {
-			$this->errorStr = 'Control characters encounterd in UTF-8 data';
+			$this->_errorStr = 'Control characters encounterd in UTF-8 data';
 			
 			return null;
 		}
 		
 		$data = iconv('UTF-8', 'UTF-8', $sanitized);
 		if (!$silent && mb_strlen($data) > $maxLength) {
-			$this->errorStr = 'Data length is ' . (strlen($data) - $maxLength) . ' characters oversized';
+			$this->_errorStr = 'Data length is ' . (strlen($data) - $maxLength) . ' characters oversized';
 			
 			return null;
 		}

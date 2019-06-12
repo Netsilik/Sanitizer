@@ -11,16 +11,15 @@ namespace Netsilik\Lib\Sanitizer\Plugin;
 use Netsilik\Lib\Sanitizer\SanitizerPlugin;
 
 /**
- * Force data to be valid hex 40 character long hexadecimal number
+ * Force data to be valid hex 40 character long hexadecimal number, zero left padded up 40 characters
  *
  * @return string
- * @note zero left padded up 40 characters
  */
 class SanitizerPlugin_Sha1 extends SanitizerPlugin
 {
-	protected $regEx       = '/[^0-9A-F]/i';
+	protected $_regEx       = '/[^0-9A-F]/i';
 	
-	protected $maxLength   = 40;
+	protected $_maxLength   = 40;
 	
-	protected $forceLength = true;
+	protected $_forceLength = true;
 }

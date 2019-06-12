@@ -14,10 +14,6 @@ use Netsilik\Lib\Sanitizer\SanitizerPlugin;
  * Force data to be of ascii printable, LF, tab or CR
  *
  * @return string
- * @warning:
- * ** ******************************************************************* **
- * ** WARNING: The sanitized results are not 'safe', escape as nessecary! **
- * ** ******************************************************************* **
  */
 class SanitizerPlugin_Ascii extends SanitizerPlugin
 {
@@ -31,5 +27,5 @@ class SanitizerPlugin_Ascii extends SanitizerPlugin
 	// Note: the first character is a space
 	// Also allowed:
 	//    tab, CR and LF
-	protected $regEx = '/[^a-z0-9_\\s!"#%&\'()*+,\\-\\.\\/:;<=>?@\\[\\]\\\\{\\|}\\^`~]/i';
+	protected $_regEx = '/[^a-z0-9_\\s!"#%&\'()*+,\\-\\.\\/:;<=>?@\\[\\]\\\\{\\|}\\^`~]/i';
 }

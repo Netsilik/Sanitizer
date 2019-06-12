@@ -14,10 +14,6 @@ use Netsilik\Lib\Sanitizer\SanitizerPlugin;
  * Force data to be valid file name characters
  *
  * @return string
- * @warning:
- * ** ******************************************************************* **
- * ** WARNING: The sanitized results are not 'safe', escape as nessecary! **
- * ** ******************************************************************* **
  */
 class SanitizerPlugin_FileName extends SanitizerPlugin
 {
@@ -29,7 +25,7 @@ class SanitizerPlugin_FileName extends SanitizerPlugin
 	//    mnopqrstuvwxyz{}
 	//    ~
 	// Note: first character is a space
-	protected $regEx     = '/[^a-z0-9_0x20!#$%&(),\\-\\.;=@^{}~]/i';
+	protected $_regEx     = '/[^a-z0-9_0x20!#$%&(),\\-\\.;=@^{}~]/i';
 	
-	protected $maxLength = 254;
+	protected $_maxLength = 254;
 }

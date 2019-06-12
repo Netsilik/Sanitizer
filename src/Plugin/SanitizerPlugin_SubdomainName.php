@@ -17,7 +17,7 @@ use Netsilik\Lib\Sanitizer\SanitizerPlugin;
  */
 class SanitizerPlugin_SubdomainName extends SanitizerPlugin
 {
-	protected $regex     = '/^[a-z0-9]+(\\-[a-z0-9]+)*$/i';
+	protected $regex      = '/^[a-z0-9]+(\\-[a-z0-9]+)*$/i';
 	
-	protected $maxLength = 64;
+	protected $_maxLength = 64;
 }

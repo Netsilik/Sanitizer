@@ -17,5 +17,5 @@ use Netsilik\Lib\Sanitizer\SanitizerPlugin;
  */
 class SanitizerPlugin_Word extends SanitizerPlugin
 {
-	protected $regEx = '/[^a-z0-9_]/i';
+	protected $_regEx = '/[^a-z0-9_]/i';
 }

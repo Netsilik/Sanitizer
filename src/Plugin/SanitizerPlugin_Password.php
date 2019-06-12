@@ -11,15 +11,11 @@ namespace Netsilik\Lib\Sanitizer\Plugin;
 use Netsilik\Lib\Sanitizer\SanitizerPlugin;
 
 /**
- * Force data to be valid user provided password string. (All ascii printable characters)
+ * Force data to be valid user provided password string. (All utf-8 printable characters)
  *
  * @return string
- * @warning:
- * ** ******************************************************************* **
- * ** WARNING: The sanitized results are not 'safe', escape as nessecary! **
- * ** ******************************************************************* **
  */
 class SanitizerPlugin_Password extends SanitizerPlugin_Utf8
 {
-	protected $maxLength = 256;
+	protected $_maxLength = 256;
 }

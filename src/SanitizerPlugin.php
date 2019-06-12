@@ -15,24 +15,24 @@ namespace Netsilik\Lib\Sanitizer;
  */
 abstract class SanitizerPlugin {
 	/**
-	 * @var string $regEx The regular expression for sanitizing
+	 * @var string $_regEx The regular expression for sanitizing
 	 */
-	protected $regEx = '/[^]/';
+	protected $_regEx = '/[^]/';
 	
 	/**
-	 * @var int $maxLength The default maximum sanitized string length
+	 * @var int $_maxLength The default maximum sanitized string length
 	 */
-	protected $maxLength = 255;
+	protected $_maxLength = 255;
 	
 	/**
-	 * @var bool $forceLength Flag to force exact length sanitization
+	 * @var bool $_forceLength Flag to force exact length sanitization
 	 */
-	protected $forceLength = false;
+	protected $_forceLength = false;
 	
 	/**
 	 * @var string The last error
 	 */
-	protected $errorStr = '';
+	protected $_errorStr = '';
 	
 	/**
 	 * constructor
@@ -41,7 +41,7 @@ abstract class SanitizerPlugin {
 		if ( substr(get_class($this), strlen(__NAMESPACE__)+1, 16) <> 'SanitizerPlugin_') {
 			trigger_error(get_class($this).'() Derived SanitizerPlugin class name must start with \'SanitizerPlugin_\'', E_USER_ERROR);
 		}
-		$caller = $this->getCaller(3);
+		$caller = $this->_getCaller(3);
 		if ( ! isset($caller['class']) || $caller['class'] <> __NAMESPACE__.'\\Sanitizer') {
 			trigger_error(get_class($this).'() Derived SanitizerPlugin class is to be called through class Sanitizer', E_USER_ERROR);
 		}
@@ -52,7 +52,7 @@ abstract class SanitizerPlugin {
 	 * @param int $step the number of caller-steps to trace back
 	 * @return array the callstack array
 	 */
-	protected function getCaller($step) {
+	private function _getCaller($step) {
 		$callStack = debug_backtrace();
 		return isset($callStack[$step]) ? $callStack[$step] : array();
 	}
@@ -62,14 +62,14 @@ abstract class SanitizerPlugin {
 	 * @return string error description
 	 */
 	public function getError() {
-		return $this->errorStr;
+		return $this->_errorStr;
 	}
 	
 	/**
 	 * get the normalized class name for 'this'
 	 * @return string normalized class name for 'this'
 	 */
-	protected function getType() {
+	protected function _getType() {
 		$className = substr(get_class($this), 10);
 		$className[0] = strtolower($className[0]);
 		return $className;
@@ -83,25 +83,25 @@ abstract class SanitizerPlugin {
 	 * @return mixed the sanitized result (a single return type is defined by the derived classes)
 	 */
 	public function sanitize($data, $silent, $maxLength) {
-		$this->errorStr = '';
-		if (is_null($maxLength) || $this->forceLength) {
-			$maxLength = $this->maxLength;
+		$this->_errorStr = '';
+		if (is_null($maxLength) || $this->_forceLength) {
+			$maxLength = $this->_maxLength;
 		}
 		
 		if ( ! $silent) {
-			if ($this->forceLength && strlen($data) != $maxLength) {
-				$this->errorStr = 'Data length is '.(strlen($data)).', '.$maxLength.' required';
+			if ($this->_forceLength && strlen($data) != $maxLength) {
+				$this->_errorStr = 'Data length is '.(strlen($data)).', '.$maxLength.' required';
 				return null;
 			} elseif (strlen($data) > $maxLength) {
-				$this->errorStr = 'Data length is '.(strlen($data) - $maxLength).' characters oversized';
+				$this->_errorStr = 'Data length is '.(strlen($data) - $maxLength).' characters oversized';
 				return null;
-			} elseif (preg_match($this->regEx, $data)) {
-				$this->errorStr = 'Invalid characters encounterd in '.$this->getType().' data';
+			} elseif (preg_match($this->_regEx, $data)) {
+				$this->_errorStr = 'Invalid characters encounterd in '.$this->_getType().' data';
 				return null;
 			}
 		}
-		$sanitized = preg_replace($this->regEx, '', $data);
-		if ($this->forceLength) {
+		$sanitized = preg_replace($this->_regEx, '', $data);
+		if ($this->_forceLength) {
 			$sanitized = str_pad($sanitized, $maxLength, '0', STR_PAD_LEFT);
 		}
 		return (string)$sanitized;

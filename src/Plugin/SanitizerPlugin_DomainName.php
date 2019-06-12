@@ -19,5 +19,5 @@ class SanitizerPlugin_DomainName extends SanitizerPlugin
 {
 	// As specified in: RFC 1123, (RFC 952)
 	// Note: In non-compliance with RFC 1123, the _ is also allowed, since Microsoft never read those RFCs anyhow
-	protected $regEx = '/[^a-z0-9_-\\.]/i';
+	protected $_regEx = '/[^a-z0-9_-\\.]/i';
 }

@@ -17,5 +17,5 @@ use Netsilik\Lib\Sanitizer\SanitizerPlugin;
  */
 class SanitizerPlugin_Hex extends SanitizerPlugin
 {
-	protected $regEx = '/[^0-9A-F]/i';
+	protected $_regEx = '/[^0-9A-F]/i';
 }

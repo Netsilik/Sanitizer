@@ -14,10 +14,6 @@ use Netsilik\Lib\Sanitizer\SanitizerPlugin;
  * Force data to only contain characters valid in an email address
  *
  * @return string
- * @warning:
- * ** ******************************************************************* **
- * ** WARNING: The sanitized results are not 'safe', escape as nessecary! **
- * ** ******************************************************************* **
  */
 class SanitizerPlugin_Email extends SanitizerPlugin
 {
@@ -28,5 +24,5 @@ class SanitizerPlugin_Email extends SanitizerPlugin
 	// - .
 	// not allowed by RFC 1123 but endorced:
 	// _
-	protected $regEx = '/[^a-z0-9_!#$%&\'*+\\-\\/=?^`{\\|}~@\\.\\[\\]]/i';
+	protected $_regEx = '/[^a-z0-9_!#$%&\'*+\\-\\/=?^`{\\|}~@\\.\\[\\]]/i';
 }

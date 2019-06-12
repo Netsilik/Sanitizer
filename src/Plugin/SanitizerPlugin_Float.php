@@ -18,17 +18,17 @@ use Netsilik\Lib\Sanitizer\SanitizerPlugin;
 class SanitizerPlugin_Float extends SanitizerPlugin
 {
 	
-	protected $regEx = '/[^+\\-0-9\\.eE]/';
+	protected $_regEx = '/[^+\\-0-9\\.eE]/';
 	
 	public function sanitize($data, $silent, $maxLength = 0)
 	{
-		$this->errorStr = '';
-		if (!$silent && preg_match($this->regEx, $data)) {
-			$this->errorStr = 'Invalid characters encounterd in ' . $this->getType() . ' data';
+		$this->_errorStr = '';
+		if (!$silent && preg_match($this->_regEx, $data)) {
+			$this->_errorStr = 'Invalid characters encounterd in ' . $this->_getType() . ' data';
 			
 			return null;
 		}
 		
-		return (float) preg_replace($this->regEx, '', $data);
+		return (float) preg_replace($this->_regEx, '', $data);
 	}
 }

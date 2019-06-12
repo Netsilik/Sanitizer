@@ -14,13 +14,9 @@ use Netsilik\Lib\Sanitizer\SanitizerPlugin;
  * Force data to be valid uri characters
  *
  * @return string
- * @warning:
- * ** ******************************************************************* **
- * ** WARNING: The sanitized results are not 'safe', escape as nessecary! **
- * ** ******************************************************************* **
  */
 class SanitizerPlugin_UrlPathStrict extends SanitizerPlugin
 {
 	// As specified in: RFC 2396
-	protected $regEx = '/[^a-z0-9_\-\/]/i';
+	protected $_regEx = '/[^a-z0-9_\-\/]/i';
 }

@@ -17,5 +17,5 @@ use Netsilik\Lib\Sanitizer\SanitizerPlugin;
  */
 class SanitizerPlugin_UrlEncoded extends SanitizerPlugin
 {
-	protected $regEx = '/[^0-9A-F%]/';
+	protected $_regEx = '/[^0-9A-F%]/';
 }
