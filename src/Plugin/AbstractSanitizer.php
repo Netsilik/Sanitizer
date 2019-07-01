@@ -5,7 +5,7 @@ use Netsilik\Sanitizer\Interfaces\iSantizerPlugin;
 
 
 /**
- * class SanitizerPlugin() abstract class for all sanitizer plugin classes called as magic methods by class Sanitizer
+ * Abstract class for all sanitizer plugin classes called as magic methods by class Sanitizer
  *
  * @abstract
  */
