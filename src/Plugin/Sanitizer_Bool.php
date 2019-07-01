@@ -1,5 +1,5 @@
 <?php
-namespace Netsilik\Lib\Sanitizer\Plugin;
+namespace Netsilik\Sanitizer\Plugin;
 /**
  * @package       Core
  * @version       1.77
@@ -8,18 +8,17 @@ namespace Netsilik\Lib\Sanitizer\Plugin;
  * @license       EUPL (European Union Public Licence, v.1.1)
  */
 
-use Netsilik\Lib\Sanitizer\SanitizerPlugin;
+use Netsilik\Sanitizer\Plugin\AbstractSanitizer;
 
 /**
  * Force data to be of type bool, resolve all false-ish values to false
  *
  * @return bool
  */
-class SanitizerPlugin_Bool extends SanitizerPlugin
+class Sanitizer_Bool extends AbstractSanitizer
 {
 	public function sanitize($data, $silent, $maxLength = 0)
 	{
-		$this->_errorStr = '';
 		if (is_bool($data)) {
 			return $data;
 		}
@@ -32,7 +31,7 @@ class SanitizerPlugin_Bool extends SanitizerPlugin
 		} elseif ($data == 'false' || $data == '0' || $data == '-1') {
 			return false;
 		} elseif (!$silent) {
-			$this->_errorStr = 'Invalid characters encounterd in ' . $this->_getType() . ' data';
+			$this->_errors[] = 'Invalid characters encounterd in ' . $this->_getType() . ' data';
 		}
 		
 		return null;

@@ -1,5 +1,5 @@
 <?php
-namespace Netsilik\Lib\Sanitizer\Plugin;
+namespace Netsilik\Sanitizer\Plugin;
 /**
  * @package       Core
  * @version       1.77
@@ -8,14 +8,14 @@ namespace Netsilik\Lib\Sanitizer\Plugin;
  * @license       EUPL (European Union Public Licence, v.1.1)
  */
 
-use Netsilik\Lib\Sanitizer\SanitizerPlugin;
+use Netsilik\Sanitizer\Plugin\AbstractSanitizer;
 
 /**
  * Force data to be valid user provided password string. (All utf-8 printable characters)
  *
  * @return string
  */
-class SanitizerPlugin_Password extends SanitizerPlugin_Utf8
+class Sanitizer_Password extends Sanitizer_Utf8
 {
 	protected $_maxLength = 256;
 }

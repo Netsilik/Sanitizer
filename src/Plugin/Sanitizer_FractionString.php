@@ -1,5 +1,5 @@
 <?php
-namespace Netsilik\Lib\Sanitizer\Plugin;
+namespace Netsilik\Sanitizer\Plugin;
 /**
  * @package       Core
  * @version       1.77
@@ -8,16 +8,16 @@ namespace Netsilik\Lib\Sanitizer\Plugin;
  * @license       EUPL (European Union Public Licence, v.1.1)
  */
 
-use Netsilik\Lib\Sanitizer\SanitizerPlugin;
+use Netsilik\Sanitizer\Plugin\AbstractSanitizer;
 
 /**
  * Force data to be valid fraction string (for example: 3/2)
  *
  * @return string
  */
-class SanitizerPlugin_FractionString extends SanitizerPlugin
+class Sanitizer_FractionString extends AbstractSanitizer
 {
-	protected $regex      = '/([^0-9\\/\\-])/';
-	
 	protected $_maxLength = 255;
+	
+	protected $regex      = '/([^0-9\\/\\-])/';
 }

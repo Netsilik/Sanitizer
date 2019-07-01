@@ -1,5 +1,5 @@
 <?php
-namespace Netsilik\Lib\Sanitizer\Plugin;
+namespace Netsilik\Sanitizer\Plugin;
 /**
  * @package       Core
  * @version       1.77
@@ -8,16 +8,16 @@ namespace Netsilik\Lib\Sanitizer\Plugin;
  * @license       EUPL (European Union Public Licence, v.1.1)
  */
 
-use Netsilik\Lib\Sanitizer\SanitizerPlugin;
+use Netsilik\Sanitizer\Plugin\AbstractSanitizer;
 
 /**
  * Force data to be valid mimetype string
  *
  * @return string
  */
-class SanitizerPlugin_MimeType extends SanitizerPlugin
+class Sanitizer_MimeType extends AbstractSanitizer
 {
-	protected $_regEx     = '/[^0-9a-z\\/]/i';
-	
 	protected $_maxLength = 64;
+	
+	protected $_regEx     = '/[^0-9a-z\\/]/i';
 }

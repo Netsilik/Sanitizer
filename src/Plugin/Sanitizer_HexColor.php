@@ -1,5 +1,5 @@
 <?php
-namespace Netsilik\Lib\Sanitizer\Plugin;
+namespace Netsilik\Sanitizer\Plugin;
 /**
  * @package       Core
  * @version       1.77
@@ -8,14 +8,16 @@ namespace Netsilik\Lib\Sanitizer\Plugin;
  * @license       EUPL (European Union Public Licence, v.1.1)
  */
 
-use Netsilik\Lib\Sanitizer\SanitizerPlugin;
+use Netsilik\Sanitizer\Plugin\AbstractSanitizer;
 
 /**
  * Force data to be valid Hex color characters
  *
  * @return string
  */
-class SanitizerPlugin_HexColor extends SanitizerPlugin
+class Sanitizer_HexColor extends AbstractSanitizer
 {
+	protected $_maxLength = 9;
+	
 	protected $_regEx = '/[^0-9A-F#]/';
 }

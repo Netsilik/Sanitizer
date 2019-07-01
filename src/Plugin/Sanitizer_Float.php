@@ -1,5 +1,5 @@
 <?php
-namespace Netsilik\Lib\Sanitizer\Plugin;
+namespace Netsilik\Sanitizer\Plugin;
 /**
  * @package       Core
  * @version       1.77
@@ -8,23 +8,22 @@ namespace Netsilik\Lib\Sanitizer\Plugin;
  * @license       EUPL (European Union Public Licence, v.1.1)
  */
 
-use Netsilik\Lib\Sanitizer\SanitizerPlugin;
+use Netsilik\Sanitizer\Plugin\AbstractSanitizer;
 
 /**
  * Force data to be of type floating point (also known as "floats", "doubles", "decimal", or "real numbers")
  *
  * @return int cleaned data
  */
-class SanitizerPlugin_Float extends SanitizerPlugin
+class Sanitizer_Float extends AbstractSanitizer
 {
 	
 	protected $_regEx = '/[^+\\-0-9\\.eE]/';
 	
 	public function sanitize($data, $silent, $maxLength = 0)
 	{
-		$this->_errorStr = '';
 		if (!$silent && preg_match($this->_regEx, $data)) {
-			$this->_errorStr = 'Invalid characters encounterd in ' . $this->_getType() . ' data';
+			$this->_errors[] = 'Invalid characters encounterd in ' . $this->_getType() . ' data';
 			
 			return null;
 		}

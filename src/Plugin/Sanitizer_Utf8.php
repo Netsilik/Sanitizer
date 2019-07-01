@@ -1,5 +1,5 @@
 <?php
-namespace Netsilik\Lib\Sanitizer\Plugin;
+namespace Netsilik\Sanitizer\Plugin;
 /**
  * @package       Core
  * @version       1.77
@@ -8,7 +8,7 @@ namespace Netsilik\Lib\Sanitizer\Plugin;
  * @license       EUPL (European Union Public Licence, v.1.1)
  */
 
-use Netsilik\Lib\Sanitizer\SanitizerPlugin;
+use Netsilik\Sanitizer\Plugin\AbstractSanitizer;
 
 /**
  * Force data to be of encoding UTF-8 with normalized newlines, excluding UTF-8 control characters
@@ -17,15 +17,12 @@ use Netsilik\Lib\Sanitizer\SanitizerPlugin;
  *
  * @return string
  */
-class SanitizerPlugin_Utf8 extends SanitizerPlugin
+class Sanitizer_Utf8 extends AbstractSanitizer
 {
 	protected $_regEx    = '/[^\\p{L}\\p{M}\\p{N}\\p{P}\\p{S}\\p{Z}\n]/u';
 	
-	protected $_errorStr = '';
-	
 	public function sanitize($data, $silent, $maxLength = 0)
 	{
-		$this->_errorStr = '';
 		if (!function_exists('mb_strlen')) { // Check for Multibyte String support
 			trigger_error('Multibyte String functionality not supported. Please enable the Multibyte String extension enabled or do not use this sanitizer', E_USER_ERROR);
 		}
@@ -35,7 +32,7 @@ class SanitizerPlugin_Utf8 extends SanitizerPlugin
 		}
 		if (!$this->checkUtf8Valid($data)) {
 			if (!$silent) {
-				$this->_errorStr = 'Data is not a valid UTF-8 byte pattern data';
+				$this->_errors[] = 'Data is not a valid UTF-8 byte pattern data';
 				
 				return null;
 			}
@@ -47,14 +44,14 @@ class SanitizerPlugin_Utf8 extends SanitizerPlugin
 		$data      = $this->normalizeNewlines($data);
 		$sanitized = preg_replace($this->_regEx, '', $data); // Remove control characters
 		if (!$silent && $data <> $sanitized) {
-			$this->_errorStr = 'Control characters encounterd in UTF-8 data';
+			$this->_errors[] = 'Control characters encounterd in UTF-8 data';
 			
 			return null;
 		}
 		
 		$data = iconv('UTF-8', 'UTF-8', $sanitized);
 		if (!$silent && mb_strlen($data) > $maxLength) {
-			$this->_errorStr = 'Data length is ' . (strlen($data) - $maxLength) . ' characters oversized';
+			$this->_errors[] = 'Data length is ' . (strlen($data) - $maxLength) . ' characters oversized';
 			
 			return null;
 		}

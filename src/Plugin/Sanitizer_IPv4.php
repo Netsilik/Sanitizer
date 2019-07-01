@@ -1,5 +1,5 @@
 <?php
-namespace Netsilik\Lib\Sanitizer\Plugin;
+namespace Netsilik\Sanitizer\Plugin;
 /**
  * @package       Core
  * @version       1.77
@@ -8,14 +8,16 @@ namespace Netsilik\Lib\Sanitizer\Plugin;
  * @license       EUPL (European Union Public Licence, v.1.1)
  */
 
-use Netsilik\Lib\Sanitizer\SanitizerPlugin;
+use Netsilik\Sanitizer\Plugin\AbstractSanitizer;
 
 /**
  * Force data to be contain only number or .
  *
  * @return string
  */
-class SanitizerPlugin_IPv4 extends SanitizerPlugin
+class Sanitizer_IPv4 extends AbstractSanitizer
 {
+	protected $_maxLength = 15;
+	
 	protected $_regEx = '/[^0-9\\.]/';
 }
