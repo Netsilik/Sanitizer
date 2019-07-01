@@ -89,7 +89,7 @@ class Sanitizer
 	 */
 	private function _instantiateSanitizer(string $sanitizer) : void
 	{
-		$sanitizerClassName = __NAMESPACE__ . '\\Plugin\\Sanitizer_' . ucfirst($sanitizer);
+		$sanitizerClassName = __NAMESPACE__ . '\\Plugins\\Sanitizer_' . ucfirst($sanitizer);
 		
 		if (!class_exists($sanitizerClassName)) {
 			trigger_error('Sanitizer ' . $sanitizer . ' does not exist', E_USER_ERROR);

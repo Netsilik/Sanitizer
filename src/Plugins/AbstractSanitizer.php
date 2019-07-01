@@ -1,5 +1,5 @@
 <?php
-namespace Netsilik\Sanitizer\Plugin;
+namespace Netsilik\Sanitizer\Plugins;
 
 use Netsilik\Sanitizer\Interfaces\iSantizerPlugin;
 
