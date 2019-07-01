@@ -88,18 +88,15 @@ abstract class AbstractSanitizer implements iSantizerPlugin
 			if (preg_match($this->_regEx, $data)) {
 				$this->_errors[] = 'Invalid characters encounterd in ' . $this->_getType() . ' data';
 				
-				return null;
 			}
 			if (strlen($data) > $maxLength) {
 				$this->_errorStr = 'Data length is ' . (strlen($data) - $maxLength) . ' characters oversized';
 				
-				return null;
 			}
 		}
 		
 		$sanitized = preg_replace($this->_regEx, '', $data);
 		if ($maxLength > 0) {
-			
 			return substr($sanitized, 0, $maxLength);
 		}
 		
