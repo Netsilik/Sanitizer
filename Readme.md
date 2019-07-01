@@ -19,24 +19,23 @@ Latest version available at: https://gitlab.com/Netsilik/Sanitizer
 Example of usage
 
 ```php
-// Some associative array with non-trusted values
-$_TEST['userId'] = 10;
-$_TEST['textField'] = 'hallo';
-$_TEST['array'][0] = 'foo';
-$_TEST['array'][1] = 'bar';
-$_TEST['array'][2] = 'foo';
+
+$sanitizer = new Sanitizer(); // Instantiate sanitizer object
+
+// Call signature
+// $sanitizer->type(scalar $data, scalar $defaultValue, int $maxLength, bool $silent);
 
 
-// Object creation
-$_SANITIZED = null; // define your result array
-$sanitizer = new Sanitizer($_SANITIZED); // Instantiate sanitizer object with a reference to our result array as construction argument
+// Example:
+$a = $sanitizer->int('123');
+$b = $sanitizer->utf8('hello, world');
+$c = $sanitizer->bool(-1);
+$d = $sanitizer->ascii(null, 'someDefault');
+$e = $sanitizer->utf8('Lorem ipsum dolor sit amet, consectetur adipiscing elit.', '', 26);
 
-// Variable sanitization:
-$sanitizer->int($_TEST, 'userId');
-$sanitizer->utf8($_TEST, 'textField', '', true, 1000);
-$sanitizer->ascii($_TEST, 'array', 0);
-
-var_dump( Sanitizer::int('TEST') );
-
-var_dump( $_SANITIZED );
+var_dump($a); // int(123)
+var_dump($b); // string(12) "hello, world"
+var_dump($c); // bool(false)
+var_dump($d); // string(11) "someDefault"
+var_dump($e); // string(26) "Lorem ipsum dolor sit amet"
 ```
