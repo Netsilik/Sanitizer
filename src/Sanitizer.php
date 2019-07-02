@@ -41,7 +41,7 @@ class Sanitizer
 		$silent       = isset($args[3]) ? $args[3] : false;
 		
 		if (null === $value) {
-			trigger_error('Argument 1 is undefined, scalar expected', E_USER_ERROR);
+			trigger_error(__CLASS__ . '::' . $sanitizer . '() expects at least 1 parameters, 0 given', E_USER_ERROR);
 		}
 		
 		// Instantiate the requested sanitizer if required
