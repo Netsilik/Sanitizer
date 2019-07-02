@@ -3,7 +3,7 @@
     "description": "Sanitization",
     "keywords": ["sanitization"],
     "type": "library",
-    "license": "EUPL",
+    "license": "EUPL-1.2",
 	"homepage": "https://gitlab.com/Netsilik/Sanitizer",
     "authors": [
         {
