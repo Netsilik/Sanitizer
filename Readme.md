@@ -19,14 +19,13 @@ Latest version available at: https://gitlab.com/Netsilik/Sanitizer
 Example of usage
 
 ```php
-
-$sanitizer = new Sanitizer(); // Instantiate sanitizer object
+// Instantiate sanitizer object
+$sanitizer = new Sanitizer();
 
 // Call signature
-// $sanitizer->type(scalar $data, scalar $defaultValue, int $maxLength, bool $silent);
+// $sanitizer->type(scalar $data, scalar $defaultValue = null, int $maxLength = -1, bool $silent = false);
 
-
-// Example:
+// Sanitize some values
 $a = $sanitizer->int('123');
 $b = $sanitizer->utf8('hello, world');
 $c = $sanitizer->bool(-1);

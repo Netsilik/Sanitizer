@@ -28,20 +28,20 @@ class Sanitizer
 	 * Magic method that delegates the virtual method calls to their actual object instances (magic factory pattern)
 	 *
 	 * @param string $sanitizer name of the magic-method to call
-	 * @param array  $args      the arguments to feed to the magic santizer method, array $args() in the format [mixed $value, scalar $defaultValue =
-	 *                          null, int $maxLength = null, bool $silent = false]
+	 * @param array $args the arguments to feed to the magic santizer method, array $args() in the format:
+	 *                    [mixed $value, scalar $default = null, int $maxLength = null, bool $silent = false]
 	 *
 	 * @return mixed The sanitized value
 	 */
 	public function __call(string $sanitizer, array $args)
 	{
-		$value        = isset($args[0]) ? $args[0] : null;
-		$defaultValue = isset($args[1]) ? $args[1] : null;
-		$maxLength    = isset($args[2]) ? $args[2] : null;
-		$silent       = isset($args[3]) ? $args[3] : false;
+		$value     = isset($args[0]) ? $args[0] : null;
+		$default   = isset($args[1]) ? $args[1] : null;
+		$maxLength = isset($args[2]) ? $args[2] : null;
+		$silent    = isset($args[3]) ? $args[3] : false;
 		
 		if (null === $value) {
-			trigger_error('Argument 1 is undefined, scalar expected', E_USER_ERROR);
+			trigger_error(__CLASS__ . '::' . $sanitizer . '() expects at least 1 parameters, 0 given', E_USER_ERROR);
 		}
 		
 		// Instantiate the requested sanitizer if required
@@ -51,7 +51,7 @@ class Sanitizer
 		
 		// Let's sanitize
 		if (null === ($sanitized = $this->_sanitizers[ $sanitizer ]->sanitize($value, $maxLength, $silent))) {
-			return $defaultValue;
+			return $default;
 		}
 		
 		return $sanitized;
