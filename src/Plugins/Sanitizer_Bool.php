@@ -17,9 +17,9 @@ class Sanitizer_Bool extends AbstractSanitizer
 			return ($data === 0 || $data === -1) ? false : true;
 		}
 		$data = strtolower($data);
-		if ($data == 'true' || $data == '1') {
+		if ($data == 'true' || $data == 'on' || $data == 'yes' || $data == '1') {
 			return true;
-		} elseif ($data == 'false' || $data == '0' || $data == '-1') {
+		} elseif ($data == 'false' || $data == 'off' || $data == 'no' || $data == '0' || $data == '-1') {
 			return false;
 		} elseif (!$silent) {
 			$this->_errors[] = 'Invalid characters encounterd in ' . $this->_getType() . ' data';
